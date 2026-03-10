@@ -1,0 +1,148 @@
+<project xmlns="https://maven.apache.org/POM/4.0.0"
+
+         xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+
+         xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>MyVCF</groupId>
+    <artifactId>MyVCF</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+
+        <!-- Selenium -->
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.29.0</version>
+        </dependency>
+
+        <!-- TestNG -->
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.8.0</version>
+</dependency>
+
+<!-- API module -->
+<!--    <dependency> -->
+<!--      <groupId>org.apache.logging.log4j</groupId>-->
+<!--      <artifactId>log4j-api</artifactId>-->
+<!--      <version>2.23.1</version>-->
+<!--    </dependency>-->
+
+<!-- Core implementation module -->
+<!--    <dependency>-->
+<!--       <groupId>org.apache.logging.log4j</groupId>-->
+<!--       <artifactId>log4j-core</artifactId>-->
+<!--       <version>2.23.1</version>-->
+<!--    </dependency>-->
+
+<!-- JSON support -->
+<dependency>
+  <groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-databind</artifactId>
+  <version>2.17.1</version>
+</dependency>
+<dependency>
+  <groupId>com.fasterxml.jackson.datatype</groupId>
+  <artifactId>jackson-datatype-jsr310</artifactId> 
+  <version>2.17.1</version>
+</dependency>
+
+<!-- Report -->
+<dependency>
+  <groupId>com.aventstack</groupId>
+  <artifactId>extentreports</artifactId>
+  <version>5.0.6</version>
+  <scope>test</scope>
+</dependency>
+
+
+<dependency>
+  <groupId>org.projectlombok</groupId>
+  <artifactId>lombok</artifactId>
+  <version>1.18.34</version>
+  <scope>provided</scope>
+</dependency>
+
+<!-- Email (but right now is throwing error)-->
+<dependency>
+<groupId>com.mailslurp</groupId>
+<artifactId>mailslurp-client-java</artifactId>
+<version>17.0.0</version>
+</dependency>
+
+
+    </dependencies>
+    
+    <build>
+  <plugins>
+    <!-- Fix for missing Maven Clean Plugin dependencies -->
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-clean-plugin</artifactId>
+  <version>3.2.0</version>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>3.6.4</version>
+      <scope>compile</scope>
+      <optional>false</optional>
+    </dependency>
+  </dependencies>
+</plugin>
+
+
+
+    <!-- Existing Compiler Plugin -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.13.0</version>
+      <configuration>
+        <!-- JDK 21 compatibility -->
+        <source>21</source>
+        <target>21</target>
+
+        <!-- Force javac fork so the add-exports args are applied -->
+        <fork>true</fork>
+
+        <!-- Required exports for Lombok with JDK 21 -->
+        <compilerArgs>
+          <arg>--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
+          <arg>--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
+          <arg>--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg>
+          <arg>--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+          <arg>--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+          <arg>--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+        </compilerArgs>
+
+        <!-- Ensure Lombok is recognized as the annotation processor -->
+        <annotationProcessorPaths>
+          <path>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+          </path>
+        </annotationProcessorPaths>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+</project>
+
+

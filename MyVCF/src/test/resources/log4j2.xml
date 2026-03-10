@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="10">
+  <Properties>
+    <!-- Allow overrides via -Dlogs.dir=... and -Dlogs.level=... -->
+    <Property name="LOG_DIR">${sys:logs.dir:-target/logs}</Property>
+    <Property name="LOG_LEVEL">${sys:logs.level:-info}</Property>
+    <!-- Timestamp, level, class name, message -->
+    <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %c{1} - %msg%n</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+
+    <RollingFile name="File"
+                 fileName="${LOG_DIR}/automation.log"
+                 filePattern="${LOG_DIR}/automation-%d{yyyyMMdd}-%i.log.gz">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="10"/>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Root level="${LOG_LEVEL}">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="File"/>
+    </Root>
+  </Loggers>
+</Configuration>
+
