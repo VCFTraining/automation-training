@@ -219,6 +219,7 @@ public abstract class BasePage {
             try {
                 WebElement el = inputByLabelSmart(labels);
                 clearAndType(el, text);
+                System.out.println("The text is " + text);
                 return;
             } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
                 last = new RuntimeException("clearAndTypeByLabel attempt " + (i+1) + " failed: " + e, e);
@@ -462,5 +463,24 @@ public abstract class BasePage {
             return "";
         }
     }
+    //get the text of a field by given label
+    protected String getFieldTextByLabel(String label) {
+    	String xpath =
+    	"//span[normalize-space()= '" + escape(label) + "' and contains(@class,'field-label')]" +
+    	"/ancestor::div[contains(@class,'slds-form-element__label')]" +
+    	"/following-sibling::div//span[contains(@class,'test-id__field-value') or contains(@class,'slds-form-element__static')]";
+
+    	WebElement el = waitVisible(By.xpath(xpath));
+    	String text = el.getText().trim();
+    	if (!text.isEmpty()) {
+    	return text;
+    	}
+
+    	Object jsText = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", el);
+    	return jsText == null ? "" : jsText.toString().trim();
+    	}
+    
+    
+    
     
 }
