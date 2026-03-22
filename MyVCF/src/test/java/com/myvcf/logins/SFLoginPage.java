@@ -1,4 +1,4 @@
-package com.myvcf.pages.salesforceinternal;
+package com.myvcf.logins;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;

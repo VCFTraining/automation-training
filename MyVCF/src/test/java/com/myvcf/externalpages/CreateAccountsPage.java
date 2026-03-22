@@ -1,4 +1,4 @@
-package com.myvcf.pages;
+package com.myvcf.externalpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -93,18 +93,20 @@ public class CreateAccountsPage extends BasePage {
 			return;
 		}
 		if (hasItin) {
-			clickRadio("Do you have an Individual Taxpayer Identification Number", "Yes");
-			clearAndTypeByLabel(itin, "Do you have an Individual Taxpayer Identification Number");
-			clearAndTypeByLabel(confirmItin, "Confirm Individual Taxpayer Identification Number");
+			clickRadio("Do you have an Individual Taxpayer Identification Number (ITIN) issued by the United States",
+					"Yes");
+			enterMaskedDigitsByLabel(itin, "Individual Taxpayer Identification Number (ITIN)");
+			enterMaskedDigitsByLabel(confirmItin, "Confirm Individual Taxpayer Identification Number");
 
 		} else {
-			clickRadio("Do you have an Individual Taxpayer Identification Number", "No");
+			clickRadio("Do you have an Individual Taxpayer Identification Number (ITIN) issued by the United States",
+					"No");
 		}
 
 	}
 
 	public void enterNationalId(String idType, String nationalId, String confirmNationalId, String idIssuer) {
-		if (idType == null) {
+		if (idType == null || idType.equals("Other ID")) {
 			return;
 		}
 		clickRadio("What type of identification number do you have?", "National ID");
@@ -114,7 +116,7 @@ public class CreateAccountsPage extends BasePage {
 	}
 
 	public void enterOtherId(String idType, String otherId, String confirmOtherId, String idIssuer) {
-		if (idType == null) {
+		if (idType == null || idType.equals("National ID")) {
 			return;
 		}
 		clickRadio("What type of identification number do you have?", "Other ID");
@@ -125,6 +127,7 @@ public class CreateAccountsPage extends BasePage {
 
 	public void clickCreateAccountButton() {
 		WebElement createAccountButton = driver.findElement(createAccountLocator);
+
 		safeClick(createAccountButton);
 	}
 

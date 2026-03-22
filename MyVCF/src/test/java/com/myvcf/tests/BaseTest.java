@@ -96,15 +96,15 @@ public abstract class BaseTest {
                 System.out.println("[BaseTest] Final URL: " + driver.getCurrentUrl());
             } catch (Exception ignored) {}
         } finally {
-            try {
-                if (driver != null) driver.quit();
-            } catch (Exception e) {
-                System.err.println("[BaseTest] Error during driver.quit(): " + e.getMessage());
-            } finally {
-                STEP_NO.remove();
-                driver = null;
-                try { DriverFactory.quitDriver(); } catch (Exception ignored) {}
-            }
+//            try {
+//                if (driver != null) driver.quit();
+//            } catch (Exception e) {
+//                System.err.println("[BaseTest] Error during driver.quit(): " + e.getMessage());
+//            } finally {
+//                STEP_NO.remove();
+//                driver = null;
+//                try { DriverFactory.quitDriver(); } catch (Exception ignored) {}
+//            }
         }
     }
 
