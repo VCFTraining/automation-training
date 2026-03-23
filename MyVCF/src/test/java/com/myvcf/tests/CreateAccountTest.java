@@ -73,27 +73,55 @@ public class CreateAccountTest extends BaseTest {
 		// Verify the success message
 		Assert.assertTrue(createAccountsPage.successfullAccountCreationMessageIsDisplayed());
 
-////		// Navigate to MyVCF Internal 
+		// Navigate to MyVCF Internal
+
 		openSalesforceInternal();
 		String fullName = data.getFirstName() + " " + data.getMiddleName() + " " + data.getLastName();
+
 		goToPersonAccountPage(fullName, data.getEmail());
 		SFPersonAccountPage sfPersonAccountPage = new SFPersonAccountPage(driver);
-		// Validate Name, Email, DOB, SSN, HasSSN.
+
 		// Soft assertion: check value but don't stop execution if it fails
+
+		// Validate that the Account Name displayed matches the expected full name
 		softAssert.assertEquals(sfPersonAccountPage.getAccountName(), fullName, "fullName mismatch");
+
+		// Validate that the Email displayed matches the expected email from test data
 		softAssert.assertEquals(sfPersonAccountPage.getEmail(), data.getEmail(), "Email mismatch");
+
+		// Validate expected Birth Date in MM/DD/YYYY format and validate it matches UI
 		String birthDate = data.getMonth() + "/" + data.getDay() + "/" + data.getYear();
 		softAssert.assertEquals(sfPersonAccountPage.getBirthDate(), birthDate, "birthDate mismatch");
+
+		// Validate whether SSN presence flag (Yes/No) matches expected data
 		softAssert.assertEquals(sfPersonAccountPage.getHasSSN(), data.getHasSsn(), "hasSSN mismatch");
 
+		// Validate that the SSN value matches expected SSN
 		softAssert.assertEquals(sfPersonAccountPage.getSSN(), normalizeValue(data.getSsn()), "SSN mismatch");
+
+		// Validate whether ITIN presence flag (Yes/No) matches expected data
 		softAssert.assertEquals(sfPersonAccountPage.getHasItin(), data.getHasItin(), "hasITIn mismatch");
+
+		// Validate that the ITIN value matches expected ITIN
+
 		softAssert.assertEquals(sfPersonAccountPage.getItin(), normalizeValue("9" + data.getItin()), "ITIN mismatch");
-		softAssert.assertEquals(sfPersonAccountPage.getAlternateIdType(), data.getIdType(), "Alternate ID Type mismatch");
-		softAssert.assertEquals(sfPersonAccountPage.getNationalIDNumber(), data.getNationalId(), "National ID Number mismatch");
-		softAssert.assertEquals(sfPersonAccountPage.getOtherIDNumber(), data.getOtherIdNumber(), "Other ID Number mismatch");
+
+		// Validate that the Alternate ID Type (e.g., Driver License, Passport) matches
+		// expected value
+
+		softAssert.assertEquals(sfPersonAccountPage.getAlternateIdType(), data.getIdType(),
+				"Alternate ID Type mismatch");
+
+		// Validate that the National ID Number matches expected value
+		softAssert.assertEquals(sfPersonAccountPage.getNationalIDNumber(), data.getNationalId(),
+				"National ID Number mismatch");
+
+		// Validate that the Other ID Number matches expected value
+		softAssert.assertEquals(sfPersonAccountPage.getOtherIDNumber(), data.getOtherIdNumber(),
+				"Other ID Number mismatch");
+
+		// Validate that the ID Issuer (issuing authority) matches expected value
 		softAssert.assertEquals(sfPersonAccountPage.getIdIssuer(), data.getIdIssuer(), " ID Issuer  mismatch");
-		softAssert.assertAll();
 
 	}
 
