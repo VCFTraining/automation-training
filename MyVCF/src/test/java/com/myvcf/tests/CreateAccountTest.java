@@ -104,7 +104,7 @@ public class CreateAccountTest extends BaseTest {
 
 		// Validate that the ITIN value matches expected ITIN
 
-		softAssert.assertEquals(sfPersonAccountPage.getItin(), normalizeValue("9" + data.getItin()), "ITIN mismatch");
+		softAssert.assertEquals(sfPersonAccountPage.getItin(), normalizeValue(data.getItin()), "ITIN mismatch");
 
 		// Validate that the Alternate ID Type (e.g., Driver License, Passport) matches
 		// expected value
@@ -122,6 +122,8 @@ public class CreateAccountTest extends BaseTest {
 
 		// Validate that the ID Issuer (issuing authority) matches expected value
 		softAssert.assertEquals(sfPersonAccountPage.getIdIssuer(), data.getIdIssuer(), " ID Issuer  mismatch");
+		
+		softAssert.assertAll();
 
 	}
 

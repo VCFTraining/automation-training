@@ -95,8 +95,8 @@ public class CreateAccountsPage extends BasePage {
 		if (hasItin) {
 			clickRadio("Do you have an Individual Taxpayer Identification Number (ITIN) issued by the United States",
 					"Yes");
-			enterMaskedDigitsByLabel(itin, "Individual Taxpayer Identification Number (ITIN)");
-			enterMaskedDigitsByLabel(confirmItin, "Confirm Individual Taxpayer Identification Number");
+			enterMaskedDigitsByLabel(itin.substring(1), "Individual Taxpayer Identification Number (ITIN)");
+			enterMaskedDigitsByLabel(confirmItin.substring(1), "Confirm Individual Taxpayer Identification Number");
 
 		} else {
 			clickRadio("Do you have an Individual Taxpayer Identification Number (ITIN) issued by the United States",
