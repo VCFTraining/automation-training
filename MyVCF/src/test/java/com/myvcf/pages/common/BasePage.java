@@ -607,30 +607,4 @@ public abstract class BasePage {
 		}
 	}
 
-	public String getFieldTextByLabel(String label) {
-		String fieldXpath = "//span[contains(@class,'field-label') and normalize-space()='" + escape(label) + "']"
-				+ "/ancestor::div[contains(@class,'slds-form-element')]";
-
-		WebElement field = waitVisible(By.xpath(fieldXpath));
-
-		List<WebElement> valueEls = field.findElements(By.xpath(
-				".//span[contains(@class,'test-id__field-value') or contains(@class,'slds-form-element__static')]"));
-
-		if (valueEls.isEmpty()) {
-			return null; // or "" if you want blank string
-		}
-
-		WebElement el = valueEls.get(0);
-
-		String text = el.getText();
-		if (text != null && !text.trim().isEmpty()) {
-			return text.trim();
-		}
-
-		Object jsText = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", el);
-
-		String result = jsText == null ? null : jsText.toString().trim();
-		return (result == null || result.isEmpty()) ? null : result;
-	}
-
 }
