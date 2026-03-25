@@ -1,8 +1,6 @@
 <project xmlns="https://maven.apache.org/POM/4.0.0"
-
-         xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-
-         xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,7 +10,7 @@
 
     <dependencies>
 
-        <!-- Selenium -->
+		<!-- Selenium -->
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -20,7 +18,7 @@
             <version>4.29.0</version>
         </dependency>
 
-        <!-- TestNG -->
+		<!-- TestNG -->
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -28,13 +26,7 @@
             <version>7.10.2</version>
             <scope>test</scope>
         </dependency>
-<!-- Source: https://mvnrepository.com/artifact/com.opencsv/opencsv -->
-<dependency>
-    <groupId>com.opencsv</groupId>
-    <artifactId>opencsv</artifactId>
-    <version>5.12.0</version>
-    <scope>compile</scope>
-</dependency>
+		
 
         <dependency>
     <groupId>io.github.bonigarcia</groupId>
@@ -96,7 +88,7 @@
     
     <build>
   <plugins>
-    <!-- Fix for missing Maven Clean Plugin dependencies -->
+			<!-- Fix for missing Maven Clean Plugin dependencies -->
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-clean-plugin</artifactId>
@@ -113,21 +105,20 @@
 </plugin>
 
 
-
-    <!-- Existing Compiler Plugin -->
+			<!-- Existing Compiler Plugin -->
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-compiler-plugin</artifactId>
       <version>3.13.0</version>
       <configuration>
-        <!-- JDK 21 compatibility -->
+					<!-- JDK 21 compatibility -->
         <source>21</source>
         <target>21</target>
 
-        <!-- Force javac fork so the add-exports args are applied -->
+					<!-- Force javac fork so the add-exports args are applied -->
         <fork>true</fork>
 
-        <!-- Required exports for Lombok with JDK 21 -->
+					<!-- Required exports for Lombok with JDK 21 -->
         <compilerArgs>
           <arg>--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
           <arg>--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
@@ -137,7 +128,7 @@
           <arg>--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
         </compilerArgs>
 
-        <!-- Ensure Lombok is recognized as the annotation processor -->
+					<!-- Ensure Lombok is recognized as the annotation processor -->
         <annotationProcessorPaths>
           <path>
             <groupId>org.projectlombok</groupId>
