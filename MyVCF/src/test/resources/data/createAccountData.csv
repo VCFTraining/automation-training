@@ -1,0 +1,5 @@
+"scenario","firstName","middleName","lastName","suffix","email","year","month","day","hasSsn","ssn","confirmSsn","hasItin","itin","confirmItin","idType","nationalId","confirmNationalId","idIssuer","otherIdNumber","confirmOtherIdNumber"
+"account creation with SSN","Miriam","MC","Chen","Sr.","myvcftest+214@gmail.com","1975","10","29","true","666-45-1210","666-45-1210","","","","","","","","",""
+"account creation with ITIN","Leo","LX","Xee","Jr.","myvcftest+215@gmail.com","1992","10","12","false","","","true","966-56-0099","966-56-0099","","","","","",""
+"account creation with National ID","Mateo","MR","Rossi","V","myvcftest+216@gmail.com","1987","10","12","false","","","false","","","National ID","458796216","458796216","State of Test","",""
+"account creation with Other ID","Lucia","LF","Ferreira","IV","myvcftest+217@gmail.com","1988","11","25","false","","","false","","","Other ID","","","Other Test","987562007","987562007"

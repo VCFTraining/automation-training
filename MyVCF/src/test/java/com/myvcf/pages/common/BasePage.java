@@ -356,9 +356,10 @@ public abstract class BasePage {
 					t.sendKeys(value);
 				} catch (Exception ignored) {
 				}
-				WebElement opt = waitVisible(
-						By.xpath("//div[@role='listbox']//*[@role='option' and (normalize-space()='" + escape(value)
-								+ "' or .//span[normalize-space()='" + escape(value) + "'])]"));
+				WebElement opt = waitVisible(By.xpath("//*[@role='listbox']//*[@role='option' and ("
+						+ "normalize-space()='" + escape(value) + "'" + " or .//span[normalize-space()='"
+						+ escape(value) + "']" + " or @data-value='" + escape(value) + "'" + " or @data-label='"
+						+ escape(value) + "'" + " or .//*[@title='" + escape(value) + "']" + ")]"));
 				highlight(opt, "Option: " + value);
 				safeClick(opt);
 				return;

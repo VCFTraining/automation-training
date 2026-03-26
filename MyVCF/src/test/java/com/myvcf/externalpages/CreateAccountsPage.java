@@ -14,6 +14,8 @@ public class CreateAccountsPage extends BasePage {
 	public CreateAccountsPage(WebDriver driver) {
 		super(driver);
 	}
+	
+	//*[@role='option' and @data-value = 'Sr.']
 
 	public void filloutCreateAccountForm(CreateAccountData data) {
 		enterFirstName(data.getFirstName());
@@ -47,7 +49,8 @@ public class CreateAccountsPage extends BasePage {
 		if (suffix == null) {
 			return;
 		}
-		clearAndTypeByLabel(suffix, "Suffix");
+		
+		selectByVisibleTextNearLabel("Suffix", suffix);
 	}
 
 	public void enterEmail(String email) {

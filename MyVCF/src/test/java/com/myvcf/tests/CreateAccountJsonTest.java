@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.myvcf.core.ConfigReader;
-import com.myvcf.core.CsvDataReader;
 import com.myvcf.core.JsonDataReader;
 import com.myvcf.externalpages.CreateAccountsPage;
 import com.myvcf.internalpages.SFHomePage;
@@ -17,13 +16,13 @@ import com.myvcf.logins.LoginPage;
 import com.myvcf.logins.SFLoginPage;
 import com.myvcf.pojo.CreateAccountData;
 
-public class CreateAccountTest extends BaseTest {
+public class CreateAccountJsonTest extends BaseTest {
 
 	
 	@DataProvider(name = "createAccountData")
 	public Object[][] createAccountData() {
-		List<CreateAccountData> rows = CsvDataReader.readResourceList("/data/createAccountData.csv",
-				CreateAccountData.class);
+		List<CreateAccountData> rows = JsonDataReader.readResourceList("/data/createAccount.json",
+				CreateAccountData[].class);
 		return rows.stream().map(r -> new Object[] { r }).toArray(Object[][]::new);
 	}
 	
