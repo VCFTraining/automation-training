@@ -19,21 +19,22 @@ import com.myvcf.pojo.CreateAccountData;
 
 public class CreateAccountTest extends BaseTest {
 
-	
 	@DataProvider(name = "createAccountData")
 	public Object[][] createAccountData() {
 		List<CreateAccountData> rows = CsvDataReader.readResourceList("/data/createAccountData.csv",
 				CreateAccountData.class);
 		return rows.stream().map(r -> new Object[] { r }).toArray(Object[][]::new);
 	}
-	
+
 	private String maskId(String value) {
-	    if (value == null) return null;
+		if (value == null)
+			return null;
 
-	    String digits = value.replaceAll("\\D", "");
-	    if (digits.length() <= 4) return digits;
+		String digits = value.replaceAll("\\D", "");
+		if (digits.length() <= 4)
+			return digits;
 
-	    return "***-**-" + digits.substring(digits.length() - 4);
+		return "***-**-" + digits.substring(digits.length() - 4);
 	}
 
 	private void gotoCreateAccountPage() {
@@ -44,7 +45,7 @@ public class CreateAccountTest extends BaseTest {
 
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickCreateAccountButton();
-		
+
 		// Step 2
 		passStep(" 📋 Opened Create Account Page");
 
@@ -108,7 +109,8 @@ public class CreateAccountTest extends BaseTest {
 
 		openSalesforceInternal();
 
-		String fullName = data.getFirstName() + " " + (data.getMiddleName() == null ? "" :( data.getMiddleName() + " " )) + data.getLastName() + " " + (data.getSuffix()==null ? "" : data.getSuffix());
+		String fullName = data.getFirstName() + " " + (data.getMiddleName() == null ? "" : (data.getMiddleName() + " "))
+				+ data.getLastName() + " " + (data.getSuffix() == null ? "" : data.getSuffix());
 
 		goToPersonAccountPage(fullName, data.getEmail());
 		SFPersonAccountPage sfPersonAccountPage = new SFPersonAccountPage(driver);
@@ -134,88 +136,57 @@ public class CreateAccountTest extends BaseTest {
 		// Step 10
 		passStep(" ✔️ Verified Birthdate : " + sfPersonAccountPage.getBirthDate());
 
-
-	
 		if (Boolean.TRUE.equals(data.getHasSsn())) {
 
-		    softAssert.assertEquals(sfPersonAccountPage.getHasSSN(), true, "hasSSN mismatch");
-		    passStep(" ✔️ Verified HasSSN : Yes");
+			softAssert.assertEquals(sfPersonAccountPage.getHasSSN(), true, "hasSSN mismatch");
+			passStep(" ✔️ Verified HasSSN : Yes");
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getSSN(),
-		            normalizeValue(data.getSsn()),
-		            "SSN mismatch"
-		    );
-		    passStep(" ✔️ Verified SSN : " + maskId(sfPersonAccountPage.getSSN()));
+			softAssert.assertEquals(sfPersonAccountPage.getSSN(), normalizeValue(data.getSsn()), "SSN mismatch");
+			passStep(" ✔️ Verified SSN : " + maskId(sfPersonAccountPage.getSSN()));
 
 		}
 
-	
 		else if (Boolean.TRUE.equals(data.getHasItin())) {
 
-		    softAssert.assertEquals(sfPersonAccountPage.getHasItin(), true, "hasITIN mismatch");
-		    passStep(" ✔️ Verified HasITIN : Yes");
+			softAssert.assertEquals(sfPersonAccountPage.getHasItin(), true, "hasITIN mismatch");
+			passStep(" ✔️ Verified HasITIN : Yes");
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getItin(),
-		            normalizeValue(data.getItin()),
-		            "ITIN mismatch"
-		    );
-		    passStep(" ✔️ Verified ITIN : " + maskId(sfPersonAccountPage.getItin()));
+			softAssert.assertEquals(sfPersonAccountPage.getItin(), normalizeValue(data.getItin()), "ITIN mismatch");
+			passStep(" ✔️ Verified ITIN : " + maskId(sfPersonAccountPage.getItin()));
 
 		}
 
 		else if ("National ID".equalsIgnoreCase(data.getIdType())) {
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getAlternateIdType(),
-		            data.getIdType(),
-		            "Alternate ID Type mismatch"
-		    );
-		    passStep(" ✔️ Verified Alternate ID Type : " + sfPersonAccountPage.getAlternateIdType());
+			softAssert.assertEquals(sfPersonAccountPage.getAlternateIdType(), data.getIdType(),
+					"Alternate ID Type mismatch");
+			passStep(" ✔️ Verified Alternate ID Type : " + sfPersonAccountPage.getAlternateIdType());
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getNationalIDNumber(),
-		            data.getNationalId(),
-		            "National ID mismatch"
-		    );
-		    passStep(" ✔️ Verified National ID : " + maskId(sfPersonAccountPage.getNationalIDNumber()));
+			softAssert.assertEquals(sfPersonAccountPage.getNationalIDNumber(), data.getNationalId(),
+					"National ID mismatch");
+			passStep(" ✔️ Verified National ID : " + maskId(sfPersonAccountPage.getNationalIDNumber()));
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getIdIssuer(),
-		            data.getIdIssuer(),
-		            "ID Issuer mismatch"
-		    );
-		    passStep(" ✔️ Verified ID Issuer : " + sfPersonAccountPage.getIdIssuer());
+			softAssert.assertEquals(sfPersonAccountPage.getIdIssuer(), data.getIdIssuer(), "ID Issuer mismatch");
+			passStep(" ✔️ Verified ID Issuer : " + sfPersonAccountPage.getIdIssuer());
 		}
 
 		else if ("Other ID".equalsIgnoreCase(data.getIdType())) {
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getAlternateIdType(),
-		            data.getIdType(),
-		            "Alternate ID Type mismatch"
-		    );
-		    passStep(" ✔️ Verified Alternate ID Type : " + sfPersonAccountPage.getAlternateIdType());
+			softAssert.assertEquals(sfPersonAccountPage.getAlternateIdType(), data.getIdType(),
+					"Alternate ID Type mismatch");
+			passStep(" ✔️ Verified Alternate ID Type : " + sfPersonAccountPage.getAlternateIdType());
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getOtherIDNumber(),
-		            data.getOtherIdNumber(),
-		            "Other ID mismatch"
-		    );
-		    passStep(" ✔️ Verified Other ID Number : " + maskId(sfPersonAccountPage.getOtherIDNumber()));
+			softAssert.assertEquals(sfPersonAccountPage.getOtherIDNumber(), data.getOtherIdNumber(),
+					"Other ID mismatch");
+			passStep(" ✔️ Verified Other ID Number : " + maskId(sfPersonAccountPage.getOtherIDNumber()));
 
-		    softAssert.assertEquals(
-		            sfPersonAccountPage.getIdIssuer(),
-		            data.getIdIssuer(),
-		            "ID Issuer mismatch"
-		    );
-		    passStep(" ✔️ Verified ID Issuer : " + sfPersonAccountPage.getIdIssuer());
+			softAssert.assertEquals(sfPersonAccountPage.getIdIssuer(), data.getIdIssuer(), "ID Issuer mismatch");
+			passStep(" ✔️ Verified ID Issuer : " + sfPersonAccountPage.getIdIssuer());
 		}
 		attachScreenshotToExtent("Screenshot", "All fields were verified");
 		softAssert.assertAll();
 
-		stepInfo(" 🏁✔️ All fields were verified successfully for the scenario:  "  + data.getScenario());
+		stepInfo(" 🏁✔️ All fields were verified successfully for the scenario:  " + data.getScenario());
 
 	}
 

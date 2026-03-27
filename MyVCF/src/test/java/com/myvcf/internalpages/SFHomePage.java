@@ -27,7 +27,8 @@ public class SFHomePage extends BasePage {
 
 	public void clickPersonAccountLink(String name) {
 
-		safeClick(By.xpath("//a[contains(@title, '" + name + "')]"));
+		safeClick(By.xpath("//a[contains(@title, '" + name.trim() + "')]"));
+
 	}
 
 	public SFHomePage(WebDriver driver) {
