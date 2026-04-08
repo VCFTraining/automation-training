@@ -1,5 +1,8 @@
 package com.myvcf.externalpages;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,8 +17,6 @@ public class CreateAccountsPage extends BasePage {
 	public CreateAccountsPage(WebDriver driver) {
 		super(driver);
 	}
-	
-	//*[@role='option' and @data-value = 'Sr.']
 
 	public void filloutCreateAccountForm(CreateAccountData data) {
 		enterFirstName(data.getFirstName());
@@ -49,16 +50,20 @@ public class CreateAccountsPage extends BasePage {
 		if (suffix == null) {
 			return;
 		}
-		
+
 		selectByVisibleTextNearLabel("Suffix", suffix);
 	}
 
-	public void enterEmail(String email) {
-//		int random = (int)(Math.random()*900) + 100;
-//		email = email.replaceAll("\\+\\d{3}@", "+" +random+"@");
-//		System.out.println("the new random email is " + email);
-		clearAndTypeByLabel(email, "Email");
+//	public void enterEmail(String email) {
+//
+//		clearAndTypeByLabel(email, "Email");
+//	}
+	public void enterEmail(String baseEmail) {
+	    String timeStamp = new SimpleDateFormat("HHmmssddMMyyyy").format(new Date());
+	    String uniqueEmail = baseEmail + "+" + timeStamp + "@gmail.com";
+	    clearAndTypeByLabel(uniqueEmail, "Email");
 	}
+	
 
 	public void enterDateOfBirth(String year, String month, String day) {
 		String dob = month + "-" + day + "-" + year;
