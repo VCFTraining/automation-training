@@ -1,0 +1,27 @@
+[{
+																		"scenario": "account creation with Other ID",
+																					"firstName": "Lucia",
+																					"middleName": null,
+																					"lastName": "Ferreira",
+																					"suffix": null,
+																					"email": "myvcftest",
+																					"year": "1988",
+																					"month": "11",
+																					"day": "25",
+																					"hasSsn": false,
+																					"ssn": null,
+																					"confirmSsn" : null,
+																					"hasItin": false,
+																					"itin": null,
+																					"confirmItin":null,
+																					"idType": "Other ID",
+																					"nationalId": null,
+																					"confirmNationalId": null,
+																					"idIssuer": "Other Test",
+																					"otherIdNumber": "987562777",
+																					"confirmOtherIdNumber": "987562777"
+																					}
+																					
+			
+			
+]

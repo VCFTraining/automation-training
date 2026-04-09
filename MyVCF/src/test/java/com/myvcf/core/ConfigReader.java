@@ -142,6 +142,24 @@ public final class ConfigReader {
     public static String getSalesforcePassword(String env) {
         return get("SF." + env + ".password", null);
     }
+    
+    
+    
+    
+ // Returns the Salesforce AdminUsername for the given environment.
+    public static String getSalesforceAdminUsername(String env) {
+        return get("SF." + env + ".usernameAdmin", null);
+    }
+
+    // Returns the Salesforce AdminPassword for the given environment.
+    public static String getSalesforceAdminPassword(String env) {
+        return get("SF." + env + ".passwordAdmin", null);
+    }
+    
+    
+    
+    
+    
 
     /** Returns active environment (default = SIT). */
     // Figures out which environment is active right now.
